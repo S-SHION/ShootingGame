@@ -63,16 +63,24 @@ public class GameFrame extends MyFrame{
 				if(checkHit(e,b)) {
 					System.out.println("あたり");
 					hits++;
+					//敵のライフを減らす
+					e.life--;
+				}
+				//敵のライフが0以下になったら敵を消す
+				if (e.life<=0){
 					GameWorld.enemies.remove(j);
 				}
+				//そうでなければ次の敵の判定へ
 				else
 				{
 				j++;
 				}
 			}
+			//プレイヤー弾が当たっていたら弾を消す
 			if(hits>0) {
 				GameWorld.playerBullets.remove(i);
 			}
+			//そうでなければ次の弾の判定へ
 			else
 			{
 				i++;
