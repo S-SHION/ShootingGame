@@ -13,6 +13,7 @@ public class GameFrame extends MyFrame{
 			GameWorld.player.move();
 			movePlayerBullets();
 			moveEnemies();
+			checkPlayerAndEnemies();
 			sleep(0.03);
 		}
 	}
@@ -35,5 +36,17 @@ public class GameFrame extends MyFrame{
 			e.draw(this);
 			e.move();
 		}
+	}
+	public void checkPlayerAndEnemies() {
+		for (int i=0 ; i<GameWorld.enemies.size(); i++) {
+			Enemy e=GameWorld.enemies.get(i);
+			//敵の位置からプレイヤーの位置を引いた数の絶対値が30以内のとき
+			if (Math.abs(e.x-GameWorld.player.x)<=30 && Math.abs(e.y-GameWorld.player.y)<=30) {
+				//当たった判定にする
+				System.out.println("やられた！");
+				GameWorld.player.y=-1000;
+			}
+		}
+		
 	}
 }
