@@ -91,7 +91,7 @@ public class GameFrame extends MyFrame{
 	//キャラクタaとキャラクタbが衝突しているかどうかを判定
 	public boolean checkHit (Character a, Character b) {
 		//キャラクタaの位置からキャラクタbの位置を引いた数の絶対値が30以下かどうか
-		if(Math.abs(a.x-b.x)<=30 && Math.abs(a.y-b.y)<=30) {
+		if(Math.abs(a.x-b.x)<=15 && Math.abs(a.y-b.y)<=15) {
 			//もし30以下だったら衝突している(trueを返す)
 			return true;
 		}
