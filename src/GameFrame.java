@@ -41,9 +41,8 @@ public class GameFrame extends MyFrame{
 	public void checkPlayerAndEnemies() {
 		for (int i=0 ; i<GameWorld.enemies.size(); i++) {
 			Enemy e=GameWorld.enemies.get(i);
-			//敵の位置からプレイヤーの位置を引いた数の絶対値が30以内のとき
-			if (Math.abs(e.x-GameWorld.player.x)<=30 && Math.abs(e.y-GameWorld.player.y)<=30) {
-				//当たった判定にする
+			//checkHitメソッドを呼び出す
+			if(checkHit(GameWorld.player,e)) {
 				System.out.println("やられた！");
 				GameWorld.player.y=-1000;
 			}
@@ -61,7 +60,7 @@ public class GameFrame extends MyFrame{
 				//敵1つ1つについて、変数eに入れて繰り返し実行する
 				Enemy e=GameWorld.enemies.get(j);
 				//敵eとプレイヤー弾bが衝突していたら「あたり」と表示
-				if(Math.abs(e.x-b.x)<=30 && Math.abs(e.x-b.y)<=30) {
+				if(checkHit(e,b)) {
 					System.out.println("あたり");
 					hits++;
 					GameWorld.enemies.remove(j);
@@ -79,6 +78,18 @@ public class GameFrame extends MyFrame{
 				i++;
 			}
 			
+		}
+	}
+	//キャラクタaとキャラクタbが衝突しているかどうかを判定
+	public boolean checkHit (Character a, Character b) {
+		//キャラクタaの位置からキャラクタbの位置を引いた数の絶対値が30以下かどうか
+		if(Math.abs(a.x-b.x)<=30 && Math.abs(a.y-b.y)<=30) {
+			//もし30以下だったら衝突している(trueを返す)
+			return true;
+		}
+		else {
+			//もし30より大きかったらだったら衝突していない(falseを返す)
+			return false;
 		}
 	}
 }
