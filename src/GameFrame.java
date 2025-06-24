@@ -4,41 +4,46 @@ public class GameFrame extends MyFrame{
 	public void run() {
 		GameWorld.player= new Player(100,300,0,0);
 		addKeyListener(GameWorld.player);
-		GameWorld.playerBullets=new Vector<PlayerBullet>();
-		GameWorld.enemies=new Vector<Enemy>();
-		GameWorld.enemies.add(new EnemyBase(100,50,1,0));
-		GameWorld.enterPressed = false;
 		
 		while(true) {
-			clear();
-			GameWorld.player.draw(this);
-			GameWorld.player.move();
-			movePlayerBullets();
-			moveEnemies();
-			checkPlayerAndEnemies();
-			checkPlayerBulletsAndEnemies();
-			//敵がすべていなくなったら「クリア」を表示
-			if (GameWorld.enemies.size() ==0) {
-				setColor(0,0,0);
-				drawString("クリア！",100,200,40);
-				//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
-				if (GameWorld.enterPressed) {
-					break;
+			GameWorld.player.x=100;
+			GameWorld.player.y=300;
+			GameWorld.playerBullets=new Vector<PlayerBullet>();
+			GameWorld.enemies=new Vector<Enemy>();
+			GameWorld.enemies.add(new EnemyBase(100,50,1,0));
+			GameWorld.enterPressed = false;
+
+			while(true) {
+				clear();
+				GameWorld.player.draw(this);
+				GameWorld.player.move();
+				movePlayerBullets();
+				moveEnemies();
+				checkPlayerAndEnemies();
+				checkPlayerBulletsAndEnemies();
+				//敵がすべていなくなったら「クリア」を表示
+				if (GameWorld.enemies.size() ==0) {
+					setColor(0,0,0);
+					drawString("クリア！",100,200,40);
+					//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
+					if (GameWorld.enterPressed) {
+						break;
+					}
 				}
-			}
-			//プレイヤーが画面外に消えたら「ゲームオーバー」を表示
-			else if(GameWorld.player.y<0)
-			{
-				setColor(0, 0, 0);
-				drawString("ゲームオーバー！", 50, 200, 40);
-				//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
-				if (GameWorld.enterPressed) {
-					break;
+				//プレイヤーが画面外に消えたら「ゲームオーバー」を表示
+				else if(GameWorld.player.y<0)
+				{
+					setColor(0, 0, 0);
+					drawString("ゲームオーバー！", 50, 200, 40);
+					//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
+					if (GameWorld.enterPressed) {
+						break;
+					}
 				}
+				sleep(0.03);
 			}
-			sleep(0.03);
 		}
-	}
+     }
 	public void movePlayerBullets() {
 			int i=0;
 			while (i<GameWorld.playerBullets.size()) {
