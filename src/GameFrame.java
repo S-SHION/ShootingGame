@@ -4,6 +4,8 @@ public class GameFrame extends MyFrame{
 	public void run() {
 		GameWorld.player= new Player(100,300,0,0);
 		addKeyListener(GameWorld.player);
+		//面の初期状態を1にセットする
+		GameWorld.stage =1;
 		
 		while(true) {
 			GameWorld.player.x=100;
@@ -15,6 +17,7 @@ public class GameFrame extends MyFrame{
 
 			while(true) {
 				clear();
+				drawString("Stage = " + GameWorld.stage, 300, 50, 15);
 				GameWorld.player.draw(this);
 				GameWorld.player.move();
 				movePlayerBullets();
@@ -27,6 +30,8 @@ public class GameFrame extends MyFrame{
 					drawString("クリア！",100,200,40);
 					//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
 					if (GameWorld.enterPressed) {
+						//クリアしたら次の面に進む
+						GameWorld.stage++;
 						break;
 					}
 				}
@@ -37,6 +42,8 @@ public class GameFrame extends MyFrame{
 					drawString("ゲームオーバー！", 50, 200, 40);
 					//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
 					if (GameWorld.enterPressed) {
+						//ゲームオーバーになったら1面に戻る
+						GameWorld.stage = 1;
 						break;
 					}
 				}
