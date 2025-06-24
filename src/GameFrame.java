@@ -20,6 +20,12 @@ public class GameFrame extends MyFrame{
 				setColor(0,0,0);
 				drawString("クリア！",100,200,40);
 			}
+			//プレイヤーが消えたら「ゲームオーバー」を表示
+			else if(GameWorld.player.y<0)
+			{
+				setColor(0, 0, 0);
+				drawString("ゲームオーバー！", 50, 200, 40);
+			}
 			sleep(0.03);
 		}
 	}
