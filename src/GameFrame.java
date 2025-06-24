@@ -18,6 +18,7 @@ public class GameFrame extends MyFrame{
 
 			while(true) {
 				clear();
+				setColor(0, 0, 0);
 				drawString("Stage = " + GameWorld.stage, 300, 50, 15);
 				drawString("Score = " + GameWorld.score, 300, 80, 15);
 				GameWorld.player.draw(this);

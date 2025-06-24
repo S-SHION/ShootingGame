@@ -15,12 +15,12 @@ public class CurveEnemy extends Enemy{
 		//自分がプレイヤーより左にいたら
 		if(x<GameWorld.player.x) {
 			//右に移動する
-			x++;
+			x += GameWorld.stage;
 		}
 		//自分がプレイヤーより右にいたら
 		if (x>GameWorld.player.x) {
 			//左に移動する
-			x--;
+			x -= GameWorld.stage;
 		}
 	}
 

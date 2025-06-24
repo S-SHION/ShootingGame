@@ -9,7 +9,7 @@ public class EnemyBase extends Enemy{
 	public EnemyBase(double x, double y, double vx, double vy) {
 		super(x, y, vx, vy);
 		//EnemyBaseの耐久値を20
-		life = 20;
+		life = GameWorld.stage * 10;
 		score = 10;
 	}
 	public void move() {
@@ -22,7 +22,7 @@ public class EnemyBase extends Enemy{
 		}
 		//GameWordにStraightEnemyを出現させる
 		if (Math.random()<0.05) {
-			GameWorld.enemies.add(new StraightEnemy(x, y, 0, 1+GameWorld.stage));
+			GameWorld.enemies.add(new StraightEnemy(x, y, 0, 1 + GameWorld.stage));
 		}
 		//GameWordにRandomEnemyを出現させる
 		if(Math.random()<0.05) {
