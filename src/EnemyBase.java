@@ -14,26 +14,26 @@ public class EnemyBase extends Enemy{
 	public void move() {
 		super.move();
 		if (x>300) {
-			vx = -1;
+			vx = - GameWorld.stage;
 		}
 		if(x<100) {
-			vx = 1;
+			vx = GameWorld.stage;
 		}
 		//GameWordにStraightEnemyを出現させる
 		if (Math.random()<0.05) {
-			GameWorld.enemies.add(new StraightEnemy(x, y, 0, 2));
+			GameWorld.enemies.add(new StraightEnemy(x, y, 0, 1+GameWorld.stage));
 		}
 		//GameWordにRandomEnemyを出現させる
 		if(Math.random()<0.05) {
-			GameWorld.enemies.add(new RandomEnemy(x, y, 0, 1));
+			GameWorld.enemies.add(new RandomEnemy(x, y, 0, GameWorld.stage));
 		}
 		//GameWordにDropEnemyを出現させる
 		if(Math.random()<0.05) {
-			GameWorld.enemies.add(new DropEnemy(x, y, 0, 1));
+			GameWorld.enemies.add(new DropEnemy(x, y, 0, GameWorld.stage));
 		}
 		//GameWordにCurveEnemyを出現させる
 		if(Math.random()<0.05) {
-			GameWorld.enemies.add(new CurveEnemy(x, y, 0, 1));
+			GameWorld.enemies.add(new CurveEnemy(x, y, 0, GameWorld.stage));
 		}
 	}
 
