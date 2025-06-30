@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -76,6 +75,10 @@ public class MyFrame extends Frame implements Runnable {
 			t.start();
 		}
 	}
+	@Override
+	public void update(Graphics g) {
+	    paint(g); // updateでちらつかないようpaintに委譲
+	}
 	/**
 	 * 四角形を描画する。色はsetColor で指定。
 	 * @param x
@@ -92,11 +95,11 @@ public class MyFrame extends Frame implements Runnable {
 			g.setColor(col);
 			g.fillRect(x, y, w, h);
 		}
-		g=getGraphics();
+		/*g=getGraphics();
 		if (g!=null) {
 			g.setColor(col);
 			g.fillRect(x, y, w, h);
-		}
+		}*/
 	}
 	public synchronized void clear() {
 		Color s=col;
@@ -110,11 +113,11 @@ public class MyFrame extends Frame implements Runnable {
 			g.setColor(col);
 			g.fillOval(x, y, w, h);
 		}
-		g=getGraphics();
+		/*g=getGraphics();
 		if (g!=null) {
 			g.setColor(col);
 			g.fillOval(x, y, w, h);
-		}
+		}*/
 	}
 	private Graphics getImageGraphics() {
 		return im.getGraphics();
@@ -164,12 +167,12 @@ public class MyFrame extends Frame implements Runnable {
 			g.drawString(str, x, y);
 		}
 		//if (locked) return;
-		g=getGraphics();
+		/*g=getGraphics();
 		if (g!=null) {
 			g.setColor(col);
 			g.setFont(new Font("Monospaced",0,size));
 			g.drawString(str, x, y);
-		}
+		}*/
 	}
 
 }

@@ -51,6 +51,7 @@ public class GameFrame extends MyFrame{
 						break;
 					}
 				}
+				repaint();
 				sleep(0.03);
 			}
 		}
