@@ -7,5 +7,4 @@ public class Enemy extends Character{
 		super(x, y, vx, vy);
 		
 	}
-
 }

@@ -82,6 +82,15 @@ public class GameFrame extends MyFrame{
 			if(e.y>400) {
 				GameWorld.enemies.remove(i);
 			}
+			else if(e instanceof BombEnemy){
+				BombEnemy bomb = (BombEnemy) e;
+				if(bomb.explodedTimer == 30) {
+					GameWorld.enemies.remove(i);
+				}
+				else {
+					i++;
+				}
+			}
 			else
 			{
 				i++;
@@ -109,22 +118,49 @@ public class GameFrame extends MyFrame{
 			while( j<GameWorld.enemies.size()) {
 				//敵1つ1つについて、変数eに入れて繰り返し実行する
 				Enemy e=GameWorld.enemies.get(j);
-				//敵eとプレイヤー弾bが衝突していたら「あたり」と表示
-				if(checkHit(e,b)) {
-					System.out.println("あたり");
-					hits++;
-					//敵のライフを減らす
-					e.life--;
-				}
-				//敵のライフが0以下になったら敵を消す
-				if (e.life<=0){
-					GameWorld.score += e.score;
-					GameWorld.enemies.remove(j);
-				}
-				//そうでなければ次の敵の判定へ
-				else
-				{
-				j++;
+				if(e instanceof BombEnemy == true) {
+					BombEnemy bomb = (BombEnemy) e;
+					if(bomb.isExploded == false) {
+						//敵eとプレイヤー弾bが衝突していたら「あたり」と表示
+						if(checkHit(e,b)) {
+							System.out.println("あたり");
+							hits++;
+							//敵のライフを減らす
+							e.life--;
+						}
+						//敵のライフが0以下になったら敵を消す
+						if (e.life<=0){
+							GameWorld.score += e.score;
+							GameWorld.enemies.remove(j);
+						}
+						//そうでなければ次の敵の判定へ
+						else
+						{
+						j++;
+						}
+						
+					}
+					else {
+						j++;
+					}
+				}else {
+					//敵eとプレイヤー弾bが衝突していたら「あたり」と表示
+					if(checkHit(e,b)) {
+						System.out.println("あたり");
+						hits++;
+						//敵のライフを減らす
+						e.life--;
+					}
+					//敵のライフが0以下になったら敵を消す
+					if (e.life<=0){
+						GameWorld.score += e.score;
+						GameWorld.enemies.remove(j);
+					}
+					//そうでなければ次の敵の判定へ
+					else
+					{
+					j++;
+					}
 				}
 			}
 			//プレイヤー弾が当たっていたら弾を消す
@@ -141,14 +177,29 @@ public class GameFrame extends MyFrame{
 	}
 	//キャラクタaとキャラクタbが衝突しているかどうかを判定
 	public boolean checkHit (Character a, Character b) {
-		//キャラクタaの位置からキャラクタbの位置を引いた数の絶対値が30以下かどうか
-		if(Math.abs(a.x-b.x)<=15 && Math.abs(a.y-b.y)<=15) {
-			//もし30以下だったら衝突している(trueを返す)
+
+		if(b instanceof BombEnemy == true) {
+			BombEnemy bomb = (BombEnemy) b;
+			if(bomb.isExploded == true) {
+				return checkHitZone(a,b,60);
+			}			
+			else {
+				return checkHitZone(a,b,15);
+			}
+		}
+		else {
+			return checkHitZone(a,b,15);
+		}
+		
+	}
+	
+	public boolean checkHitZone(Character a,Character b, int c) {
+		if(Math.abs(a.x-b.x)<=c && Math.abs(a.y-b.y)<=c) {
 			return true;
 		}
 		else {
-			//もし30より大きかったらだったら衝突していない(falseを返す)
 			return false;
 		}
+		
 	}
 }
