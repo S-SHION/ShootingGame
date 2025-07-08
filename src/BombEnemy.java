@@ -29,6 +29,7 @@ public class BombEnemy extends Enemy{
 
 	public BombEnemy(double x, double y, double vx, double vy) {
 		super(x, y, vx ,vy);
+		life = 3;
 	}
 	
     public void move() {

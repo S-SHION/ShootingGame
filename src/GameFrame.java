@@ -27,19 +27,9 @@ public class GameFrame extends MyFrame{
 				moveEnemies();
 				checkPlayerAndEnemies();
 				checkPlayerBulletsAndEnemies();
-				//敵がすべていなくなったら「クリア」を表示
-				if (GameWorld.enemies.size() ==0) {
-					setColor(0,0,0);
-					drawString("クリア！",100,200,40);
-					//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
-					if (GameWorld.enterPressed) {
-						//クリアしたら次の面に進む
-						GameWorld.stage++;
-						break;
-					}
-				}
+				
 				//プレイヤーが画面外に消えたら「ゲームオーバー」を表示
-				else if(GameWorld.player.y<0)
+				if(GameWorld.player.y<0)
 				{
 					setColor(0, 0, 0);
 					drawString("ゲームオーバー！", 50, 200, 40);
@@ -48,6 +38,17 @@ public class GameFrame extends MyFrame{
 						//ゲームオーバーになったら1面に戻る
 						GameWorld.stage = 1;
 						GameWorld.score = 0;
+						break;
+					}
+				}
+				//敵がすべていなくなったら「クリア」を表示
+				else if (GameWorld.enemies.size() ==0) {
+					setColor(0,0,0);
+					drawString("クリア！",100,200,40);
+					//Enterキーが押されたらwhileループを終了(キャラクターの動きを止める)
+					if (GameWorld.enterPressed) {
+						//クリアしたら次の面に進む
+						GameWorld.stage++;
 						break;
 					}
 				}
@@ -184,11 +185,11 @@ public class GameFrame extends MyFrame{
 				return checkHitZone(a,b,60);
 			}			
 			else {
-				return checkHitZone(a,b,15);
+				return checkHitZone(a,b,20);
 			}
 		}
 		else {
-			return checkHitZone(a,b,15);
+			return checkHitZone(a,b,20);
 		}
 		
 	}
